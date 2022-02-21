@@ -1,0 +1,7 @@
+node_modules
+images
+package-lock.json
+credentials.json
+client_secret_352524092353-2avmgrkgi0j3dhl9o2sas90k7qlgmc9n.apps.googleusercontent.com.json
+.env
+app2.js
