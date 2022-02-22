@@ -78,7 +78,9 @@ app.post("/upload", async (req, res) => {
   upload(req, res, function (err) {
     if (err) {
       console.log(err);
-      return res.end("Something went wrong");
+      return res
+        .status(404)
+        .send({ message: "Ha ocurrido un error al cargar el archivo" });
     } else {
       var arrayData = [];
       console.log("path of file:", req.file.path);
