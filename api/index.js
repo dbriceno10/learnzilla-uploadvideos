@@ -2,6 +2,7 @@ require("dotenv").config();
 const fs = require("fs");
 const express = require("express");
 const multer = require("multer");
+const path = require("path");
 const { google } = require("googleapis");
 const app = express();
 
@@ -56,7 +57,7 @@ var Storage = multer.diskStorage({
     callback(null, "./images");
   },
   filename: function (req, file, callback) {
-    callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    callback(null, file.originalname + "_" + Date.now() + path.extname(file.originalname));
   },
 });
 
