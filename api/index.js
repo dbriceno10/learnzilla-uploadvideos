@@ -99,6 +99,7 @@ app.post("/upload", async (req, res) => {
           if (err) {
             // Handle error
             console.error(err);
+            return res.status(404).send(err);
           } else {
             fileID = file.data.id;
             // console.log('File=: ', file)
@@ -107,7 +108,10 @@ app.post("/upload", async (req, res) => {
             const url = generatePublicUrl(fileID);
             url.then((data) => {
               console.log("data: ", data);
-              res.send(data);
+              return res.send(data);
+            }).catch((err) => {
+              console.log("err: ", err);
+              return res.status(404).send(err);
             });
           }
         }
