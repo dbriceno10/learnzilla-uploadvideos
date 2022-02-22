@@ -5,28 +5,28 @@ const multer = require("multer");
 const { google } = require("googleapis");
 const app = express();
 
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
 
-app.name = 'API';
+app.name = "API";
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
   res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Access-Control-Expose-Headers', 'Content-Range');
-  res.header('Content-Range', 'bytes:0-9/100');
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  res.header("Access-Control-Expose-Headers", "Content-Range");
+  res.header("Content-Range", "bytes:0-9/100");
   next();
 });
 var fileID;
@@ -106,13 +106,15 @@ app.post("/upload", async (req, res) => {
             console.log("file id: ", fileID);
             fs.unlinkSync(req.file.path);
             const url = generatePublicUrl(fileID);
-            url.then((data) => {
-              console.log("data: ", data);
-              return res.send(data);
-            }).catch((err) => {
-              console.log("err: ", err);
-              return res.status(404).send(err);
-            });
+            url
+              .then((data) => {
+                console.log("data: ", data);
+                return res.send(data);
+              })
+              .catch((err) => {
+                console.log("err: ", err);
+                return res.status(404).send(err);
+              });
           }
         }
       );
@@ -157,6 +159,6 @@ app.get("/info", (req, res) => {
   res.send(dataUrl);
 });
 
-app.listen(5000, () => {
-  console.log("App is listening on Port 5000");
+app.listen(process.env.PORT, () => {
+  console.log(`App is listening on Port ${process.env.PORT}`);
 });
