@@ -6,6 +6,6 @@ Variables de entorno necesarias para levantar el servidor:
 
 CLIENT_ID=
 CLIENT_SECRET=
-REDIRECT_URL=
+REDIRECT_URI=
 REFRESH_TOKEN=
 PORT=
